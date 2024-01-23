@@ -2,6 +2,7 @@ package com.example.bugsreporter
 
 import MainWidget
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -13,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
+import com.example.bugsreporter.Data.BugsDb
+import com.example.bugsreporter.Models.Priority
 import com.example.bugsreporter.ViewModels.AppViewModel
 import com.example.bugsreporter.ViewModels.Factory
 import com.example.bugsreporter.ui.theme.BugsReporterTheme
@@ -20,11 +23,11 @@ import com.example.bugsreporter.ui.theme.BugsReporterTheme
 class MainActivity : ComponentActivity() {
 
     private val vm by viewModels<AppViewModel> {
-        Factory(applicationContext)
+        val dao=BugsDb.getInstance(applicationContext).dao;
+        Factory(dao)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContent {
             BugsReporterTheme {
@@ -36,10 +39,10 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BugsReporterTheme {
-        MainWidget()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    BugsReporterTheme {
+//        MainWidget()
+//    }
+//}
